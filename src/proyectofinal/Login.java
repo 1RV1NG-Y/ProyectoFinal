@@ -7,12 +7,14 @@ package proyectofinal;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import clases.BD;
 
 /**
  *
  * @author Lenovo
  */
 public class Login extends javax.swing.JFrame {
+    BD conn;
 
     // Import ImageIcon     
 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
@@ -23,6 +25,13 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
     /**
      * Creates new form Login
      */
+    public Login(BD conexion){
+        this.conn=conexion;
+        initComponents();
+    }
+     
+
+
     public Login() {
         initComponents();
         logo();
