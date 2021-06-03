@@ -8,6 +8,10 @@ package proyectofinal;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import clases.BD;
+import clases.usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,10 +28,12 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
     
     /**
      * Creates new form Login
+     * @param conexion
      */
     public Login(BD conexion){
         this.conn=conexion;
         initComponents();
+         logo();
     }
      
 
@@ -49,8 +55,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txUsuario = new javax.swing.JTextField();
+        txPass = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -90,8 +96,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txPass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(186, 186, 186))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -104,13 +110,13 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txPass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(34, 34, 34)
                 .addComponent(jButton1)
@@ -122,9 +128,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +140,27 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+      String usuario =  this.txUsuario.getText().trim();
+      String pass =  this.txPass.getText().trim();
+      
+      String query ="SELECT * FROM usuario WHERE usuario='"+usuario+"' AND password=MD5('"+pass+"')";
+      this.conn.Consult(query);
+       usuario usu = null;
+      try{
+      usu = new usuario(this.conn.rs.getString(3));
+       
+        }catch (SQLException ex) {
+                System.out.println("No existe la habitacion");
+                this.dispose();
+            }
+      
+
+      this.setVisible(false);
+      new Principal(this.conn,usu).setVisible(true);
+      
+     
         
-        this.jTextField1.getText();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -186,7 +209,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txPass;
+    private javax.swing.JTextField txUsuario;
     // End of variables declaration//GEN-END:variables
 }

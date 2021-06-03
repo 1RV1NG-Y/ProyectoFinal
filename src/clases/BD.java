@@ -1,11 +1,13 @@
 
 package clases;
 
-import java.sql.Connection;//interface
-import java.sql.DriverManager;//clase
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;//interface
-import java.sql.ResultSet;//interface
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -14,10 +16,25 @@ public class BD {
     public ResultSet rs= null;
     public Connection conn = null;
     
-    public BD() throws ClassNotFoundException, SQLException{
-    Class.forName("com.mysql.jdbc.Drive");
-    String coneccion = "jdbc:mysql://localhost/hotel?user=root&password=";
-    conn = DriverManager.getConnection(coneccion);
+    public BD() {
+   
+        try {
+          
+            Class.forName("com.mysql.jdbc.Driver");
+       
+           String connectionUrl =
+                            "jdbc:mysql://localhost/hotel?"
+                            +"user=root&password=";
+
+            // conexion con la bd
+            conn = DriverManager.getConnection(connectionUrl);
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: "+ e.toString());
+        } catch (ClassNotFoundException cE) {
+            System.out.println("Class Not Found Exception: "+
+                    cE.toString());
+        }
+   
     }
     
     public void Consult(String query){
@@ -28,7 +45,7 @@ public class BD {
             if (rs!=null) {
                 rs = stmt.getResultSet(); //obtiene los resultados
                 //se coloca sobre el primer registro
-               // rs.first();
+                rs.first();
             }
         }
         catch (SQLException ex){

@@ -8,20 +8,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class presentacion extends javax.swing.JFrame {
 
+public class presentacion extends javax.swing.JFrame {
+BD conn;
     // Import ImageIcon     
 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
 
-// In init() method write this code
 
-    
-    /**
-     * Creates new form Login
-     */
-    public presentacion() {
-        initComponents();
-       
+
+   public presentacion(BD conexion) throws ClassNotFoundException, SQLException{
+           this.conn = conexion;
+            initComponents();     
+   }
+
+    public presentacion()  {
+        initComponents();     
     }
 
     /**
@@ -179,7 +180,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,13 +188,9 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        this.setVisible(false);
-    try {
-        BD conexion = new BD();
-        new Login(conexion).setVisible(true);
-    } catch (ClassNotFoundException ex) {   
-        System.out.println("Ocurrio un error al conectar a la BD ");
-    } catch (SQLException ex) {       
-    }
+    
+        new Login(this.conn).setVisible(true);
+  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -225,8 +222,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new presentacion().setVisible(true);
+            public void run() {              
+                    new presentacion().setVisible(true);             
             }
         });
     }
