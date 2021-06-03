@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class presentacion extends javax.swing.JFrame {
 
     // Import ImageIcon     
-ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
+ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
 
 // In init() method write this code
 
