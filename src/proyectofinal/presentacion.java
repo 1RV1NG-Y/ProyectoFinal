@@ -3,6 +3,8 @@ package proyectofinal;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import clases.BD;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
    public presentacion(BD conexion) throws ClassNotFoundException, SQLException{
            this.conn = conexion;
             initComponents();     
+            this.setLocationRelativeTo(null);
+            repaint();
    }
 
     public presentacion()  {
@@ -46,7 +50,6 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +81,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
 
         jLabel7.setFont(new java.awt.Font("Verdana", 2, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel7.setText("16-06-2021");
+        jLabel7.setText("16 de junio de 2021");
 
         jLabel8.setFont(new java.awt.Font("Verdana", 2, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(240, 240, 240));
@@ -90,17 +93,15 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
 
         jLabel10.setFont(new java.awt.Font("Verdana", 2, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel10.setText("jLabel10");
+        jLabel10.setText("IRVING YARON GARCIA PEREZ");
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("Entrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uaalogo-01.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,19 +132,14 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(547, 547, 547)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(1071, Short.MAX_VALUE))
+                .addContainerGap(407, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(435, 435, 435)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -163,7 +159,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -172,15 +168,13 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -223,7 +217,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {              
-                    new presentacion().setVisible(true);             
+                    new presentacion().setVisible(true);  
+                   
             }
         });
     }
@@ -232,7 +227,6 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -243,4 +237,13 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/uaalogo-01.png").getImage
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+public  void paint(Graphics g){
+    super.paint(g);
+    Toolkit t = Toolkit.getDefaultToolkit();
+    Image imagen = t.getImage("src/uaalogo-01.png");
+    g.drawImage(imagen, 200, 30, this.jPanel1);
+
+}
+
 }
