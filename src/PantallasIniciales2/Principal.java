@@ -150,6 +150,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemCostosHabitaciones);
 
         jMenuItemBuscarHuesped.setText("Buscar Huesped");
+        jMenuItemBuscarHuesped.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBuscarHuespedActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemBuscarHuesped);
 
         jMenuItemRevisarHabitacion.setText("Revisas Habitacion");
@@ -215,6 +220,14 @@ public class Principal extends javax.swing.JFrame {
          g.getContentPane().setBackground(Color.white);
          g.setVisible(true);
     }//GEN-LAST:event_jMenuItemGaleriaMouseReleased
+
+    private void jMenuItemBuscarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarHuespedActionPerformed
+        try {
+         new ImporteActual(this.conn).setVisible(true);
+     } catch (SQLException ex) {
+       
+     }
+    }//GEN-LAST:event_jMenuItemBuscarHuespedActionPerformed
 
     /**
      * @param args the command line arguments
