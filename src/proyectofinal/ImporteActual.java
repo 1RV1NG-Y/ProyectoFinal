@@ -6,6 +6,8 @@
 package proyectofinal;
 
 import clases.BD;
+import java.awt.Cursor;
+import static java.awt.Frame.HAND_CURSOR;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,8 @@ public class ImporteActual extends javax.swing.JFrame {
      public ImporteActual(BD conexion) throws SQLException {
          this.conn = conexion;
         initComponents();
+          this.btnActualizar.setCursor(new Cursor(HAND_CURSOR));
+            this.btnSalir.setCursor(new Cursor(HAND_CURSOR));
         calcularImporte();
         this.setTitle("Caja");
         this.setLocationRelativeTo(null);
@@ -52,6 +56,7 @@ public class ImporteActual extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,8 +68,9 @@ public class ImporteActual extends javax.swing.JFrame {
         jLabel1.setText("Dinero en caja");
 
         lbImporte.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
-        lbImporte.setText("jLabel2");
+        lbImporte.setText("importe");
 
+        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
