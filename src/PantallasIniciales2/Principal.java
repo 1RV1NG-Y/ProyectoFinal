@@ -3,22 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PantallasIniciales;
+package PantallasIniciales2;
 
+import clases.BD;
+import clases.usuario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import proyectofinal.ImporteActual;
 
 /**
  *
  * @author eidan
  */
 public class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
+ BD conn;
+   
+    
+     public Principal(BD conexion,usuario usu) {
+         this.conn = conexion;
+        initComponents();
+        this.setTitle("Hotel Buenavista - principal");
+        this.nombreUsuario.setText(usu.getNomUsuario());     
+        
+    }
     public Principal() {
         initComponents();
         
@@ -41,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
+        nombreUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -59,15 +72,27 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        nombreUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        nombreUsuario.setText("jLabel1");
+
+        jDesktopPane1.setLayer(nombreUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(1265, Short.MAX_VALUE)
+                .addComponent(nombreUsuario)
+                .addGap(279, 279, 279))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 957, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nombreUsuario)
+                .addContainerGap(932, Short.MAX_VALUE))
         );
 
         jMenuBar1.setAlignmentX(1.0F);
@@ -162,7 +187,15 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemIngresosActualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresosActualesActionPerformed
-        // TODO add your handling code here:
+            
+     try {
+         new ImporteActual(this.conn).setVisible(true);
+     } catch (SQLException ex) {
+       
+     }
+        
+        
+        
     }//GEN-LAST:event_jMenuItemIngresosActualesActionPerformed
 
     private void jMenuItemOcupHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcupHabitacionesActionPerformed
@@ -235,5 +268,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemOcupHabitaciones;
     private javax.swing.JMenuItem jMenuItemOcupHotel;
     private javax.swing.JMenuItem jMenuItemRevisarHabitacion;
+    private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

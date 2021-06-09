@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import clases.BD;
 import clases.usuario;
+import PantallasIniciales2.Principal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         this.conn=conexion;
         initComponents();
          logo();
+         this.setLocationRelativeTo(null);
     }
      
 
