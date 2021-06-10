@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import proyectofinal.BuscarHuesped;
 import proyectofinal.ImporteActual;
 
 /**
@@ -223,7 +224,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemBuscarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarHuespedActionPerformed
         try {
-         new ImporteActual(this.conn).setVisible(true);
+         new BuscarHuesped(this.conn).setVisible(true);
      } catch (SQLException ex) {
        
      }
