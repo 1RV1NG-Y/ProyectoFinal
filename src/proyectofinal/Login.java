@@ -16,7 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -24,6 +31,7 @@ import javax.swing.ImageIcon;
  */
 public class Login extends javax.swing.JFrame {
     BD conn;
+    
 
     // Import ImageIcon     
 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
@@ -36,10 +44,12 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
      * @param conexion
      */
     public Login(BD conexion){
+       
         this.conn=conexion;
         initComponents();
    
          this.setLocationRelativeTo(null);
+          
     }
      
 
@@ -86,11 +96,9 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         });
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usu.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cont.png"))); // NOI18N
 
         jDesktopPane1.setLayer(txUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -103,23 +111,26 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(432, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(584, 584, 584))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(txPass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 491, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(584, 584, 584))
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(54, 54, 54)
+                            .addComponent(txPass, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(39, 39, 39)
+                        .addGap(54, 54, 54)
                         .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(558, 558, 558))))
         );
@@ -137,53 +148,43 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(62, 62, 62)
+                        .addGap(70, 70, 70)
                         .addComponent(jLabel2)
-                        .addGap(120, 120, 120))))
+                        .addGap(138, 138, 138))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
-                .addGap(144, 144, 144))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1520, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, Short.MAX_VALUE)
-                .addGap(276, 276, 276))
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1049, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      String usuario =  this.txUsuario.getText().trim();
-      String pass =  this.txPass.getText().trim();
-      
-      String query ="SELECT * FROM usuario WHERE usuario='"+usuario+"' AND password=MD5('"+pass+"')";
-      this.conn.Consult(query);
-       usuario usu = null;
-      try{
-      usu = new usuario(this.conn.rs.getString(3));
-       
-        }catch (SQLException ex) {
-                System.out.println("No existe la habitacion");
-                this.dispose();
-            }
-      
+        String usuario =  this.txUsuario.getText().trim();
+        String pass =  this.txPass.getText().trim();
 
-      this.setVisible(false);
-      new Principal(this.conn,usu).setVisible(true);
-      
-     
-        
-       
+        String query ="SELECT * FROM usuario WHERE usuario='"+usuario+"' AND password=MD5('"+pass+"')";
+        this.conn.Consult(query);
+        usuario usu = null;
+        try{
+            usu = new usuario(this.conn.rs.getString(3));
+
+        }catch (SQLException ex) {
+            System.out.println("No existe la habitacion");
+            this.dispose();
+        }
+
+        this.setVisible(false);
+        new Principal(this.conn,usu).setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -217,6 +218,17 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                  try {
+         Clip   sonido = AudioSystem.getClip();
+            sonido.open(AudioSystem.getAudioInputStream(new File("src/musica.wav")));
+            sonido.start();
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
             }
         });
     }
