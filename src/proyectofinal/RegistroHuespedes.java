@@ -5,6 +5,9 @@
  */
 package proyectofinal;
 
+import clases.BD;
+import java.awt.Cursor;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 
@@ -12,12 +15,22 @@ import javax.swing.JRadioButton;
 
 public class RegistroHuespedes extends javax.swing.JFrame {
 
+    BD  conn;
     ImageIcon Man = new ImageIcon("src/Man.png");
     ImageIcon Woman = new ImageIcon("src/Woman.png");
 	
     
     public RegistroHuespedes() {
         initComponents();
+        
+    }
+
+    public RegistroHuespedes(BD conexion) throws SQLException {
+        this.conn = conexion;
+        initComponents();   
+        this.setLocationRelativeTo(null);
+        this.setUndecorated(true);
+        this.jButtonElegHabitacion.setCursor(new Cursor(HAND_CURSOR));
     }
 
     /**
@@ -36,11 +49,25 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         jRadioButtonWoman = new javax.swing.JRadioButton();
         jTextFieldNombreHuesped = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabelNom = new javax.swing.JLabel();
+        jLabelCiud = new javax.swing.JLabel();
+        jTextFieldCiudadHuesped = new javax.swing.JTextField();
+        jSpinnerNumHospedados = new javax.swing.JSpinner();
+        jLabelCiud1 = new javax.swing.JLabel();
+        jLabelDiasEstan = new javax.swing.JLabel();
+        jSpinnerDiasEstancia = new javax.swing.JSpinner();
+        jTextFieldElegHabitacion = new javax.swing.JTextField();
+        jLabelElegHabitacion = new javax.swing.JLabel();
+        jButtonElegHabitacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(744, 408));
+        setMinimumSize(new java.awt.Dimension(744, 408));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(744, 408));
+        jPanel1.setMinimumSize(new java.awt.Dimension(744, 408));
 
         jLabelFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Man.png"))); // NOI18N
         jLabelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -61,67 +88,131 @@ public class RegistroHuespedes extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldNombreHuesped.setText("Nombre");
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel2.setText("Registro huesped");
 
-        jLabel2.setText("Registro");
+        jLabelNom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelNom.setText("Nombre/Name:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabelCiud.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelCiud.setText("Ciudad:");
+
+        jSpinnerNumHospedados.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerNumHospedadosStateChanged(evt);
+            }
+        });
+
+        jLabelCiud1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelCiud1.setText("Total de personas a hospedar:");
+
+        jLabelDiasEstan.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelDiasEstan.setText("Dias de estancia:");
+
+        jSpinnerDiasEstancia.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDiasEstanciaStateChanged(evt);
+            }
+        });
+
+        jLabelElegHabitacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabelElegHabitacion.setText("Total de personas a hospedar:");
+
+        jButtonElegHabitacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButtonElegHabitacion.setText("Seleccionar habitacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelNom)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelCiud)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldCiudadHuesped)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(135, 135, 135)
-                                .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButtonWoman, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(208, 507, Short.MAX_VALUE)
-                                .addComponent(jRadioButtonMan, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(jRadioButtonWoman, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButtonMan, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelCiud1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jSpinnerNumHospedados, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabelDiasEstan)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jSpinnerDiasEstancia, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelElegHabitacion, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldElegHabitacion)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonElegHabitacion)
+                        .addGap(0, 106, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(273, 273, 273))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jRadioButtonMan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButtonWoman))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonMan)
+                            .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNom))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(53, 53, 53)
-                                .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(34, 34, 34)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonWoman))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelCiud)
+                                    .addComponent(jTextFieldCiudadHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCiud1)
+                            .addComponent(jSpinnerNumHospedados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelDiasEstan)
+                            .addComponent(jSpinnerDiasEstancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldElegHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelElegHabitacion)
+                    .addComponent(jButtonElegHabitacion))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,24 +222,43 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jRadioButtonWomanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonWomanStateChanged
+        // TODO add your handling code here:
+        if (jRadioButtonMan.isSelected()) {
+            jLabelFoto.setIcon(Man);
+        } else if (jRadioButtonWoman.isSelected()) {
+            jLabelFoto.setIcon(Woman);
+        }
+    }//GEN-LAST:event_jRadioButtonWomanStateChanged
+
     private void jRadioButtonManStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonManStateChanged
         // TODO add your handling code here:
         //JRadioButton button = (JRadioButton) evt.getSource();
         if (jRadioButtonMan.isSelected()) {
-					jLabelFoto.setIcon(Man);
-				} else if (jRadioButtonWoman.isSelected()) {
-					jLabelFoto.setIcon(Woman);
-				}
+            jLabelFoto.setIcon(Man);
+        } else if (jRadioButtonWoman.isSelected()) {
+            jLabelFoto.setIcon(Woman);
+        }
     }//GEN-LAST:event_jRadioButtonManStateChanged
 
-    private void jRadioButtonWomanStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonWomanStateChanged
+    private void jSpinnerNumHospedadosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerNumHospedadosStateChanged
         // TODO add your handling code here:
-        if (jRadioButtonMan.isSelected()) {
-					jLabelFoto.setIcon(Man);
-				} else if (jRadioButtonWoman.isSelected()) {
-					jLabelFoto.setIcon(Woman);
-				}
-    }//GEN-LAST:event_jRadioButtonWomanStateChanged
+        Integer valor = (Integer)jSpinnerNumHospedados.getValue();
+        if(valor<=0){
+            jSpinnerNumHospedados.setValue(1);
+        }else if(valor>=10){
+            jSpinnerNumHospedados.setValue(10);
+        }
+        int personasExtra = (Integer)jSpinnerNumHospedados.getValue()-1;
+    }//GEN-LAST:event_jSpinnerNumHospedadosStateChanged
+
+    private void jSpinnerDiasEstanciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDiasEstanciaStateChanged
+        // TODO add your handling code here:
+        Integer valor1 = (Integer)jSpinnerNumHospedados.getValue();
+        if(valor1<=0){
+            jSpinnerNumHospedados.setValue(1);
+        }
+    }//GEN-LAST:event_jSpinnerDiasEstanciaStateChanged
 
     /**
      * @param args the command line arguments
@@ -180,19 +290,30 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new RegistroHuespedes().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonElegHabitacion;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelCiud;
+    private javax.swing.JLabel jLabelCiud1;
+    private javax.swing.JLabel jLabelDiasEstan;
+    private javax.swing.JLabel jLabelElegHabitacion;
     private javax.swing.JLabel jLabelFoto;
+    private javax.swing.JLabel jLabelNom;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButtonMan;
     private javax.swing.JRadioButton jRadioButtonWoman;
+    private javax.swing.JSpinner jSpinnerDiasEstancia;
+    private javax.swing.JSpinner jSpinnerNumHospedados;
+    private javax.swing.JTextField jTextFieldCiudadHuesped;
+    private javax.swing.JTextField jTextFieldElegHabitacion;
     private javax.swing.JTextField jTextFieldNombreHuesped;
     // End of variables declaration//GEN-END:variables
 }
