@@ -16,13 +16,16 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import proyectofinal.BuscarHuesped;
 import proyectofinal.ImporteActual;
+import proyectofinal.RegistroHuespedes;
 
 /**
  *
  * @author eidan
  */
 public class Principal extends javax.swing.JFrame {
- BD conn;
+   
+    BD objconn = new BD();
+    BD conn;
    
     
      public Principal(BD conexion,usuario usu) {
@@ -56,7 +59,8 @@ public class Principal extends javax.swing.JFrame {
         };
         nombreUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuRegistro = new javax.swing.JMenu();
+        jMenuItemRegistrarHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemGaleria = new javax.swing.JMenuItem();
@@ -101,9 +105,23 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.setAutoscrolls(true);
         jMenuBar1.setPreferredSize(new java.awt.Dimension(260, 80));
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro.png"))); // NOI18N
-        jMenu1.setText("Registro");
-        jMenuBar1.add(jMenu1);
+        jMenuRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro.png"))); // NOI18N
+        jMenuRegistro.setText("Registro");
+        jMenuRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuRegistroMouseReleased(evt);
+            }
+        });
+
+        jMenuItemRegistrarHuesped.setText("Registrar Huesped");
+        jMenuItemRegistrarHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemRegistrarHuespedMouseReleased(evt);
+            }
+        });
+        jMenuRegistro.add(jMenuItemRegistrarHuesped);
+
+        jMenuBar1.add(jMenuRegistro);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salida2.png"))); // NOI18N
         jMenu2.setText("Salida");
@@ -224,11 +242,26 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemBuscarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarHuespedActionPerformed
         try {
-         new BuscarHuesped(this.conn).setVisible(true);
+         new BuscarHuesped(objconn).setVisible(true);
      } catch (SQLException ex) {
        
      }
     }//GEN-LAST:event_jMenuItemBuscarHuespedActionPerformed
+
+    private void jMenuRegistroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRegistroMouseReleased
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jMenuRegistroMouseReleased
+
+    private void jMenuItemRegistrarHuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarHuespedMouseReleased
+        // TODO add your handling code here:
+         try {
+         new RegistroHuespedes(objconn).setVisible(true);
+     } catch (SQLException ex) {
+       
+     }
+        
+    }//GEN-LAST:event_jMenuItemRegistrarHuespedMouseReleased
 
     /**
      * @param args the command line arguments
@@ -267,7 +300,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -281,7 +313,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNumHabitaciones;
     private javax.swing.JMenuItem jMenuItemOcupHabitaciones;
     private javax.swing.JMenuItem jMenuItemOcupHotel;
+    private javax.swing.JMenuItem jMenuItemRegistrarHuesped;
     private javax.swing.JMenuItem jMenuItemRevisarHabitacion;
+    private javax.swing.JMenu jMenuRegistro;
     private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
