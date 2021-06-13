@@ -9,32 +9,33 @@ import clases.BD;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
- * @author Lenovo
+ * @author Lenovo SELECT estatus,count(*) FROM `habitacion` WHERE estatus = 1 GROUP BY 1
  */
-public class NumHabitaciones extends javax.swing.JFrame {
-    BD conn;
+public class OcupacionHotel extends javax.swing.JFrame {
+BD conn;
     /**
-     * Creates new form NumHabitaciones
-     */ 
-    public NumHabitaciones(BD conexion) throws SQLException {
+     * Creates new form OcupacionHotel
+     */
+    public OcupacionHotel(BD conexion) throws SQLException{
         this.conn = conexion;
         initComponents();
-        barras();
+        circulo1();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(0);
     }
-
-     public NumHabitaciones() {
+    public OcupacionHotel()
+    {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,11 +54,11 @@ public class NumHabitaciones extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
 
         jButton1.setText("Salir");
@@ -71,20 +72,19 @@ public class NumHabitaciones extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
+                .addGap(202, 202, 202)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,66 +112,63 @@ public class NumHabitaciones extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NumHabitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OcupacionHotel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NumHabitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OcupacionHotel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NumHabitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OcupacionHotel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NumHabitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OcupacionHotel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NumHabitaciones().setVisible(true);
+                new OcupacionHotel().setVisible(true);
             }
         });
     }
-    
-    public void barras()
+     public void circulo1()
     {
-       int ind,dob,trip;
-       String query1,query2,query3;
+         int ocup,des;
+        String query1,query2;
+         query1 = "SELECT estatus,count(*) FROM `habitacion` WHERE estatus = 1 GROUP BY 1";
+         query2 = "SELECT estatus,count(*) FROM `habitacion` WHERE estatus = 0 GROUP BY 1";
        
-       query1 = "SELECT tipo,count(*) FROM habitacion WHERE tipo=1 GROUP BY 1";
-       query2 = "SELECT tipo,count(*) FROM habitacion WHERE tipo=2 GROUP BY 1";
-       query3 = "SELECT tipo,count(*) FROM habitacion WHERE tipo=3 GROUP BY 1";
        try{
-       this.conn.Consult(query1);
-        ind = conn.rs.getInt(2);
+           this.conn.Consult(query1);
+        ocup = conn.rs.getInt(2);
          this.conn.Consult(query2);
-         dob = conn.rs.getInt(2);
-         this.conn.Consult(query3);
-        trip = conn.rs.getInt(2);
+         des = conn.rs.getInt(2);
          
-        
-        DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        datos.setValue(ind, "Tipo de habitacion", "Individual");
-        datos.setValue(dob, "Tipo de habitacion", "Doble");
-        datos.setValue(trip, "Tipo de habitacion", "Triple ");
+        DefaultPieDataset datos = new DefaultPieDataset();
+        datos.setValue( "Ocupado",ocup);
+        datos.setValue("Desocupado",des);
        
         
-        JFreeChart barras = ChartFactory.createBarChart3D(
-        "Numero de habitaciones por tipo","Tipo", "Numero de hab", datos,
-         PlotOrientation.VERTICAL,true,true,false);
+        JFreeChart circulo = ChartFactory.createPieChart("Ocupacion en habitaciones individuales",datos,true,true,false);
         
-        ChartPanel panel = new ChartPanel(barras);
+        ChartPanel panel = new ChartPanel(circulo);
         panel.setMouseWheelEnabled(true);
-       panel.setPreferredSize(new Dimension(530,380));
+       panel.setPreferredSize(new Dimension(500,500));
         
         jPanel1.setLayout(new BorderLayout());
         jPanel1.add(panel,BorderLayout.NORTH);
         
         pack();
         repaint();
-       }
-       catch(SQLException ex)
+       }catch(SQLException ex)
        {
-           
+           JOptionPane.showMessageDialog(this,"Error");
        }
+        
+      
+         
+        
+        
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
