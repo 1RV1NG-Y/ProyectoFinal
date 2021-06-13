@@ -25,7 +25,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRegistrarHuesped">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar Huesped"/>
+                <Property name="text" type="java.lang.String" value="Check in"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItemRegistrarHuespedMouseReleased"/>
@@ -40,6 +40,16 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Salida"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBajahuesped">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Check out"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItemBajahuespedMouseReleased"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
