@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import proyectofinal.BajasHuespedes;
 import proyectofinal.BuscarHuesped;
 import proyectofinal.ImporteActual;
 import proyectofinal.OcupacionHab;
@@ -63,6 +64,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuRegistro = new javax.swing.JMenu();
         jMenuItemRegistrarHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemBajahuesped = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemGaleria = new javax.swing.JMenuItem();
         jMenuItemIngresosActuales = new javax.swing.JMenuItem();
@@ -114,7 +116,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItemRegistrarHuesped.setText("Registrar Huesped");
+        jMenuItemRegistrarHuesped.setText("Check in");
         jMenuItemRegistrarHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuItemRegistrarHuespedMouseReleased(evt);
@@ -126,6 +128,15 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salida2.png"))); // NOI18N
         jMenu2.setText("Salida");
+
+        jMenuItemBajahuesped.setText("Check out");
+        jMenuItemBajahuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemBajahuespedMouseReleased(evt);
+            }
+        });
+        jMenu2.add(jMenuItemBajahuesped);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Consulta.png"))); // NOI18N
@@ -269,6 +280,16 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemRegistrarHuespedMouseReleased
 
+    private void jMenuItemBajahuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemBajahuespedMouseReleased
+        // TODO add your handling code here:
+         try {
+         new BajasHuespedes(objconn).setVisible(true);
+        }catch (SQLException ex) {
+       
+     }
+        
+    }//GEN-LAST:event_jMenuItemBajahuespedMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +333,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemBajahuesped;
     private javax.swing.JMenuItem jMenuItemBuscarHuesped;
     private javax.swing.JMenuItem jMenuItemCostosHabitaciones;
     private javax.swing.JMenuItem jMenuItemGaleria;

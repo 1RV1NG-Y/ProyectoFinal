@@ -317,16 +317,15 @@ public class RegistroHuespedes extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        String NomHuesped, DiasEstancia, PersonasExtra, Ciudad , Habitacion, Ingreso, FEntd, FSal;
+        
+        String NomHuesped, DiasEstancia, PersonasExtra, Ciudad , Habitacion, FEntd, FSal,estatus;
         NomHuesped = jTextFieldNombreHuesped.getText();
         DiasEstancia = String.valueOf((Integer)jSpinnerDiasEstancia.getValue()).trim();
         PersonasExtra = String.valueOf((Integer)jSpinnerNumHospedados.getValue()-1).trim();//pasa el valor del spinner a string para pasarlo a la bd
         Ciudad = jTextFieldCiudadHuesped.getText();
         Habitacion = jTextFieldElegHabitacion.getText().trim();
-        Ingreso = "20";
-        
-        
-        
+        estatus = String.valueOf(1);;
+ 
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");//formato de fecha
            
         Date fechaNueva =sumarDiasFecha(this.jDateChooserFechaIngreso.getDate(),(Integer)jSpinnerDiasEstancia.getValue()); //nueva fecha
@@ -334,10 +333,15 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         FSal = formato.format(fechaNueva);
         
         System.out.println("Insertando Usuario ");
-        String parte1 = "Insert into huesped (nombre, ciudad, dias, personas_extras, habitacion, ingreso, salida) VALUES (";
-        String parte2 = "'"+NomHuesped+"','"+Ciudad+"','"+DiasEstancia+"','"+PersonasExtra+"','"+Habitacion+"',Date'"+FEntd+"','"+FSal+"')";
+        String parte1 = "Insert into huesped (nombre, ciudad, dias, personas_extras, habitacion, ingreso, salida, estatus) VALUES (";
+        String parte2 = "'"+NomHuesped+"','"+Ciudad+"','"+DiasEstancia+"','"+PersonasExtra+"','"+Habitacion+"',Date'"+FEntd+"','"+FSal+"','"+estatus+"')";
         String query = parte1 + parte2;
         this.conn.Update(query);
+        
+        
+        String query2 = "UPDATE habitacion SET estatus = 1 WHERE `num` ="+Habitacion;
+        
+        this.conn.Update(query2);
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     /**
