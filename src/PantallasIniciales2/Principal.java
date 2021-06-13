@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import proyectofinal.BajasHuespedes;
 import proyectofinal.BuscarHuesped;
 import proyectofinal.ImporteActual;
+import proyectofinal.NumHabitaciones;
 import proyectofinal.OcupacionHab;
 import proyectofinal.RegistroHuespedes;
 
@@ -167,6 +168,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemOcupHabitaciones);
 
         jMenuItemNumHabitaciones.setText("Num Habitaciones");
+        jMenuItemNumHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNumHabitacionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemNumHabitaciones);
 
         jMenuItemOcupHotel.setText("Ocupacion hotel %");
@@ -289,6 +295,16 @@ public class Principal extends javax.swing.JFrame {
      }
         
     }//GEN-LAST:event_jMenuItemBajahuespedMouseReleased
+
+    private void jMenuItemNumHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumHabitacionesActionPerformed
+        // TODO add your handling code here:
+         try {
+            
+            new NumHabitaciones(objconn).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemNumHabitacionesActionPerformed
 
     /**
      * @param args the command line arguments

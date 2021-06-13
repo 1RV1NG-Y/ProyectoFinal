@@ -29,7 +29,7 @@ public class OcupacionHab extends javax.swing.JFrame {
         circulo1();
          circulo2();
           circulo3();
-          this.setTitle("Buscar Huesped");
+          this.setTitle("Ocupacion Hab");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(0);
     }
