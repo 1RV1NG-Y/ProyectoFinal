@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import proyectofinal.BuscarHuesped;
 import proyectofinal.ImporteActual;
+import proyectofinal.OcupacionHab;
 import proyectofinal.RegistroHuespedes;
 
 /**
@@ -223,7 +224,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemIngresosActualesActionPerformed
 
     private void jMenuItemOcupHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcupHabitacionesActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            new OcupacionHab(objconn).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItemOcupHabitacionesActionPerformed
 
     private void jMenuItemOcupHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcupHotelActionPerformed
