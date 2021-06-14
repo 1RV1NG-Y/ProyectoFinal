@@ -180,7 +180,8 @@ public class ImporteActual extends javax.swing.JFrame {
     public void calcularImporte() throws SQLException{
       String query ="SELECT sum(importe) FROM caja ";
       this.conn.Consult(query);
-      this.lbImporte.setText("$"+Double.toString(this.conn.rs.getDouble(1)));        
+      this.lbImporte.setText("$"+Double.toString(this.conn.rs.getDouble(1)));     
+      
     }
 
 }

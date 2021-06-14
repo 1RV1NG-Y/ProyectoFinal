@@ -14,15 +14,20 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import proyectofinal.*;
-
+import proyectofinal.BajasHuespedes;
+import proyectofinal.BuscarHuesped;
+import proyectofinal.CheckOut;
+import proyectofinal.ImporteActual;
+import proyectofinal.RegistroHuespedes;
 
 /**
  *
  * @author eidan
  */
 public class Principal extends javax.swing.JFrame {
- BD conn;
+   
+    BD objconn = new BD();
+    BD conn;
    
     
      public Principal(BD conexion,usuario usu) {
@@ -162,11 +167,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemOcupHabitaciones);
 
         jMenuItemNumHabitaciones.setText("Num Habitaciones");
-        jMenuItemNumHabitaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemNumHabitacionesActionPerformed(evt);
-            }
-        });
         jMenu3.add(jMenuItemNumHabitaciones);
 
         jMenuItemOcupHotel.setText("Ocupacion hotel %");
@@ -177,12 +177,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemOcupHotel);
 
-        jMenuItemCostosHabitaciones.setText("Costos habitación");
-        jMenuItemCostosHabitaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCostosHabitacionesActionPerformed(evt);
-            }
-        });
+        jMenuItemCostosHabitaciones.setText("Costos habitacion");
         jMenu3.add(jMenuItemCostosHabitaciones);
 
         jMenuItemBuscarHuesped.setText("Buscar Huesped");
@@ -193,28 +188,13 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemBuscarHuesped);
 
-        jMenuItemRevisarHabitacion.setText("Buscar Habitación");
-        jMenuItemRevisarHabitacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemRevisarHabitacionActionPerformed(evt);
-            }
-        });
+        jMenuItemRevisarHabitacion.setText("Revisas Habitacion");
         jMenu3.add(jMenuItemRevisarHabitacion);
 
         jMenuItem9.setText("Habitaciones x piso");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem1.setText("Lista Huespedes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
         jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
@@ -245,7 +225,7 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItemIngresosActualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemIngresosActualesActionPerformed
             
      try {
-         new ImporteActual(this.conn).setVisible(true);
+         new ImporteActual(objconn).setVisible(true);
      } catch (SQLException ex) {
        
      }
@@ -274,33 +254,41 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemBuscarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarHuespedActionPerformed
         try {
-         new BuscarHuesped(this.conn).setVisible(true);
+         new BuscarHuesped(objconn).setVisible(true);
      } catch (SQLException ex) {
        
      }
     }//GEN-LAST:event_jMenuItemBuscarHuespedActionPerformed
 
-    private void jMenuItemCostosHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCostosHabitacionesActionPerformed
-     try {
-         new CostoHabitacion().setVisible(true);
-     } catch (SQLException ex) {}
-    }//GEN-LAST:event_jMenuItemCostosHabitacionesActionPerformed
+    private void jMenuRegistroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRegistroMouseReleased
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jMenuRegistroMouseReleased
 
-    private void jMenuItemRevisarHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRevisarHabitacionActionPerformed
-        new BuscarHabitacion().setVisible(true);
-    }//GEN-LAST:event_jMenuItemRevisarHabitacionActionPerformed
+    private void jMenuItemRegistrarHuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarHuespedMouseReleased
+        // TODO add your handling code here:
+         try {
+         new RegistroHuespedes(objconn).setVisible(true);
+     } catch (SQLException ex) {
+       
+     }
+        
+    }//GEN-LAST:event_jMenuItemRegistrarHuespedMouseReleased
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-     try {
-         new ListaHuespedes().setVisible(true);
-     } catch (SQLException ex){}
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        try {
-         new HabitacionesDisponibles().setVisible(true);
-     } catch (SQLException ex){}
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    private void jMenuItemBajahuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemBajahuespedMouseReleased
+        // TODO add your handling code here:
+         /*try {
+         new BajasHuespedes(objconn).setVisible(true);
+        }catch (SQLException ex) {
+       
+     }*/
+         try {
+         new CheckOut(objconn).setVisible(true);
+        }catch (SQLException ex) {
+       
+     }
+        
+    }//GEN-LAST:event_jMenuItemBajahuespedMouseReleased
 
     /**
      * @param args the command line arguments
