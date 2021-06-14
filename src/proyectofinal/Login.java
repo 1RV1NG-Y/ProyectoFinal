@@ -47,6 +47,17 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
        
         this.conn=conexion;
         initComponents();
+         try {
+         Clip   sonido = AudioSystem.getClip();
+            sonido.open(AudioSystem.getAudioInputStream(new File("src/musica.wav")));
+            sonido.start();
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
    
          this.setLocationRelativeTo(null);
           
@@ -184,7 +195,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
 
         this.setVisible(false);
         new Principal(this.conn,usu).setVisible(true);
-
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -218,17 +230,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-                  try {
-         Clip   sonido = AudioSystem.getClip();
-            sonido.open(AudioSystem.getAudioInputStream(new File("src/musica.wav")));
-            sonido.start();
-        } catch (LineUnavailableException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                 
             }
         });
     }
