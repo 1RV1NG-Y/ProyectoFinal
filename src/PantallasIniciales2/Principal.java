@@ -56,8 +56,10 @@ public class Principal extends javax.swing.JFrame {
         };
         nombreUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuRegistro = new javax.swing.JMenu();
+        jMenuItemRegistrarHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemBajahuesped = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemGaleria = new javax.swing.JMenuItem();
         jMenuItemIngresosActuales = new javax.swing.JMenuItem();
@@ -101,12 +103,35 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.setAutoscrolls(true);
         jMenuBar1.setPreferredSize(new java.awt.Dimension(260, 80));
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro.png"))); // NOI18N
-        jMenu1.setText("Registro");
-        jMenuBar1.add(jMenu1);
+        jMenuRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro.png"))); // NOI18N
+        jMenuRegistro.setText("Registro");
+        jMenuRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuRegistroMouseReleased(evt);
+            }
+        });
+
+        jMenuItemRegistrarHuesped.setText("Check in");
+        jMenuItemRegistrarHuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemRegistrarHuespedMouseReleased(evt);
+            }
+        });
+        jMenuRegistro.add(jMenuItemRegistrarHuesped);
+
+        jMenuBar1.add(jMenuRegistro);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Salida2.png"))); // NOI18N
         jMenu2.setText("Salida");
+
+        jMenuItemBajahuesped.setText("Check out");
+        jMenuItemBajahuesped.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItemBajahuespedMouseReleased(evt);
+            }
+        });
+        jMenu2.add(jMenuItemBajahuesped);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Consulta.png"))); // NOI18N
@@ -137,6 +162,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemOcupHabitaciones);
 
         jMenuItemNumHabitaciones.setText("Num Habitaciones");
+        jMenuItemNumHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNumHabitacionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemNumHabitaciones);
 
         jMenuItemOcupHotel.setText("Ocupacion hotel %");
@@ -172,6 +202,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemRevisarHabitacion);
 
         jMenuItem9.setText("Habitaciones x piso");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem1.setText("Lista Huespedes");
@@ -261,6 +296,12 @@ public class Principal extends javax.swing.JFrame {
      } catch (SQLException ex){}
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+         new HabitacionesDisponibles().setVisible(true);
+     } catch (SQLException ex){}
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,13 +339,13 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItemBajahuesped;
     private javax.swing.JMenuItem jMenuItemBuscarHuesped;
     private javax.swing.JMenuItem jMenuItemCostosHabitaciones;
     private javax.swing.JMenuItem jMenuItemGaleria;
@@ -312,7 +353,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNumHabitaciones;
     private javax.swing.JMenuItem jMenuItemOcupHabitaciones;
     private javax.swing.JMenuItem jMenuItemOcupHotel;
+    private javax.swing.JMenuItem jMenuItemRegistrarHuesped;
     private javax.swing.JMenuItem jMenuItemRevisarHabitacion;
+    private javax.swing.JMenu jMenuRegistro;
     private javax.swing.JLabel nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
