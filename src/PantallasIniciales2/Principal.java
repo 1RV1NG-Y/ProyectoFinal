@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import proyectofinal.BuscarHuesped;
-import proyectofinal.ImporteActual;
+import proyectofinal.*;
+
 
 /**
  *
@@ -147,7 +147,12 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemOcupHotel);
 
-        jMenuItemCostosHabitaciones.setText("Costos habitacion");
+        jMenuItemCostosHabitaciones.setText("Costos habitación");
+        jMenuItemCostosHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCostosHabitacionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemCostosHabitaciones);
 
         jMenuItemBuscarHuesped.setText("Buscar Huesped");
@@ -158,13 +163,23 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemBuscarHuesped);
 
-        jMenuItemRevisarHabitacion.setText("Revisas Habitacion");
+        jMenuItemRevisarHabitacion.setText("Buscar Habitación");
+        jMenuItemRevisarHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRevisarHabitacionActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemRevisarHabitacion);
 
         jMenuItem9.setText("Habitaciones x piso");
         jMenu3.add(jMenuItem9);
 
         jMenuItem1.setText("Lista Huespedes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
@@ -229,6 +244,22 @@ public class Principal extends javax.swing.JFrame {
        
      }
     }//GEN-LAST:event_jMenuItemBuscarHuespedActionPerformed
+
+    private void jMenuItemCostosHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCostosHabitacionesActionPerformed
+     try {
+         new CostoHabitacion().setVisible(true);
+     } catch (SQLException ex) {}
+    }//GEN-LAST:event_jMenuItemCostosHabitacionesActionPerformed
+
+    private void jMenuItemRevisarHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRevisarHabitacionActionPerformed
+        new BuscarHabitacion().setVisible(true);
+    }//GEN-LAST:event_jMenuItemRevisarHabitacionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+     try {
+         new ListaHuespedes().setVisible(true);
+     } catch (SQLException ex){}
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

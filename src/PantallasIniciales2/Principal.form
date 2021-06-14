@@ -75,8 +75,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCostosHabitaciones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Costos habitacion"/>
+                <Property name="text" type="java.lang.String" value="Costos habitaci&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCostosHabitacionesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBuscarHuesped">
               <Properties>
@@ -88,8 +91,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRevisarHabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Revisas Habitacion"/>
+                <Property name="text" type="java.lang.String" value="Buscar Habitaci&#xf3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemRevisarHabitacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
               <Properties>
@@ -100,6 +106,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lista Huespedes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
