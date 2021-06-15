@@ -24,6 +24,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.applet.AudioClip;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +33,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Login extends javax.swing.JFrame {
     BD conn;
-    
+      AudioClip Sound;
 
     // Import ImageIcon     
 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
@@ -47,6 +49,10 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
        
         this.conn=conexion;
         initComponents();
+         Sound= java.applet.Applet.newAudioClip(getClass().getResource("/musica.wav"));
+        Sound.play();
+        
+        
    
          this.setLocationRelativeTo(null);
           
@@ -176,14 +182,15 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         usuario usu = null;
         try{
             usu = new usuario(this.conn.rs.getString(3));
+             this.setVisible(false);
+        new Principal(this.conn,usu).setVisible(true);
 
         }catch (SQLException ex) {
-            System.out.println("No existe la habitacion");
-            this.dispose();
+            JOptionPane.showMessageDialog(this,"Usuario no registrado");
+           
         }
 
-        this.setVisible(false);
-        new Principal(this.conn,usu).setVisible(true);
+       
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -218,17 +225,7 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-                  try {
-         Clip   sonido = AudioSystem.getClip();
-            sonido.open(AudioSystem.getAudioInputStream(new File("src/musica.wav")));
-            sonido.start();
-        } catch (LineUnavailableException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         
             }
         });
     }

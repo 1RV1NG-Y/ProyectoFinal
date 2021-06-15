@@ -36,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
         this.setTitle("Hotel Buenavista - principal");
         this.nombreUsuario.setText(usu.getNomUsuario());     
         
+        
     }
     public Principal() {
         initComponents();
