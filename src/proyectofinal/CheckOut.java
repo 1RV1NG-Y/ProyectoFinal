@@ -24,11 +24,17 @@ public class CheckOut extends javax.swing.JFrame {
      public int spa = 500;
      public int ServicioC = 450;
      public int cobro;
+        public int cobro_extra;
      public String nombre;
+     public int dias;
+      public int personas_extras;
+      public String id;
   
     public CheckOut(BD conexion) throws SQLException {
         this.conn = conexion;
+           this.setUndecorated(true);
         initComponents();   
+    this.setLocationRelativeTo(this);
         
     }
     public CheckOut() {
@@ -60,23 +66,19 @@ public class CheckOut extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setOpaque(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Servicios Extra:");
         jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 130, 20));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Habitacion :");
         jLabel2.setOpaque(true);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 70, 20));
 
         jLabelImporte.setBackground(new java.awt.Color(255, 255, 255));
         jLabelImporte.setText("Importe : ");
         jLabelImporte.setOpaque(true);
         jLabelImporte.setPreferredSize(new java.awt.Dimension(111, 23));
-        jPanel1.add(jLabelImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, -1));
 
         jTextFieldNumHab.setToolTipText(" ");
         jTextFieldNumHab.setBorder(null);
@@ -92,27 +94,21 @@ public class CheckOut extends javax.swing.JFrame {
                 jTextFieldNumHabKeyReleased(evt);
             }
         });
-        jPanel1.add(jTextFieldNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 60, 20));
 
         jTextAreaDatosHuesped.setColumns(20);
         jTextAreaDatosHuesped.setRows(5);
-        jPanel1.add(jTextAreaDatosHuesped, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 230, 130));
 
         jCheckBoxLav.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxLav.setText("Lavanderia");
-        jPanel1.add(jCheckBoxLav, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 130, -1));
 
         jCheckBoxSC.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxSC.setText("Servicio a cuarto");
-        jPanel1.add(jCheckBoxSC, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 130, -1));
 
         jCheckBoxSpa.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxSpa.setText("Spa");
-        jPanel1.add(jCheckBoxSpa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 130, 20));
 
         jCheckBoxPaq.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxPaq.setText("Paqueteria");
-        jPanel1.add(jCheckBoxPaq, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 130, -1));
 
         jButtonCalc.setBackground(new java.awt.Color(255, 255, 255));
         jButtonCalc.setText("Calcular importe");
@@ -121,7 +117,6 @@ public class CheckOut extends javax.swing.JFrame {
                 jButtonCalcMouseReleased(evt);
             }
         });
-        jPanel1.add(jButtonCalc, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         JButtonCobro.setBackground(new java.awt.Color(255, 255, 255));
         JButtonCobro.setText("Cobrar y dar baja");
@@ -130,17 +125,117 @@ public class CheckOut extends javax.swing.JFrame {
                 JButtonCobroMouseReleased(evt);
             }
         });
-        jPanel1.add(JButtonCobro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel3.setText("Baja y cobro");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
-        jPanel1.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 260));
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jTextAreaDatosHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(JButtonCobro))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jTextFieldNumHab, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jCheckBoxSC, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jCheckBoxLav, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jCheckBoxSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabelImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel3))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jCheckBoxPaq, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jButtonCalc))
+            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jTextAreaDatosHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(JButtonCobro))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jTextFieldNumHab, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jCheckBoxSC))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jCheckBoxLav))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jCheckBoxSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabelImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jCheckBoxPaq))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jButtonCalc))
+            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,18 +261,20 @@ public class CheckOut extends javax.swing.JFrame {
             System.out.println("Presionaste enter");
             String Hab = jTextFieldNumHab.getText().trim();
             
-            String query = "SELECT * FROM huesped WHERE lower(habitacion)=lower('"+Hab+"')";
+            String query = "SELECT * FROM huesped WHERE habitacion="+Hab;
             //System.out.println("*" query + "*");
             this.conn.Consult(query);
             
            
             try{
+                 id = this.conn.rs.getString(1);
                 nombre = this.conn.rs.getString(2);
                 jTextAreaDatosHuesped.setText(  "Huesped: "+nombre+"\n"+
                                                 "Ciudad: "+conn.rs.getString(3)+"\n"+
                                                 "Habitacion usada: "+conn.rs.getString(7)+"\n"+
                                                 "Se quedo: "+conn.rs.getString(6)+" dias"+"\n"); 
-                
+                dias = conn.rs.getInt(6);
+                personas_extras  = conn.rs.getInt(8);
   
             }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Habitacion vacia",
@@ -192,10 +289,11 @@ public class CheckOut extends javax.swing.JFrame {
         // TODO add your handling code here:
         String Hab = jTextFieldNumHab.getText().trim();
         //Cobro                               
-                String query2 = "SELECT * FROM habitacion WHERE lower(num)=lower('"+Hab+"')";
+                String query2 = "SELECT * FROM habitacion WHERE num="+Hab;
                 this.conn.Consult(query2);
                 try{
-                    cobro = conn.rs.getInt(4)+ conn.rs.getInt(5);   //costo habitacion + costo extra
+                    cobro = conn.rs.getInt(4)*dias;   //costo habitacion + costo extra
+                    cobro_extra = conn.rs.getInt(5)*personas_extras;
                     
                 System.out.println("Calculando");
             }catch (SQLException ex) {
@@ -204,50 +302,47 @@ public class CheckOut extends javax.swing.JFrame {
         
         if(jCheckBoxLav.isSelected()){
                     System.out.println("lavanderia");
-                    cobro = cobro +lavanderia;
+                    cobro_extra +=lavanderia;
                 }
                 if(jCheckBoxSC.isSelected()){
-                    cobro = cobro +ServicioC;
+                    cobro_extra += ServicioC;
                 }
                 if(jCheckBoxSpa.isSelected()){
-                    cobro = cobro +spa;
+                    cobro_extra +=spa;
                 }
                 if(jCheckBoxPaq.isSelected()){
-                    cobro = cobro +paqueteria;
+                    cobro_extra+=paqueteria;
                 }
         
+                cobro += cobro_extra;
                 System.out.println("Cobro :"+cobro);
                 jLabelImporte.setText("Importe : "+String.valueOf(cobro));
     }//GEN-LAST:event_jButtonCalcMouseReleased
 
     private void JButtonCobroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JButtonCobroMouseReleased
         // TODO add your handling code here:
-         double importe=0;         
-         String query= "delete from huesped where nombre ="+"'"+nombre+"'"; //Completa sentencia mysql
+         String Hab = jTextFieldNumHab.getText().trim();
+         String query= "delete from huesped where nombre ='"+nombre+"'"; //Completa sentencia mysql
             
             int j=this.conn.Update(query);
             if (j>0)
                 JOptionPane.showMessageDialog(this, "Baja realizada ");
             else
-                JOptionPane.showMessageDialog(this, "La baja no se pudo realizar");
-            
-      String query2 ="SELECT sum(importe) FROM caja ";
-      try{
-      this.conn.Consult(query2);
-      importe = (double)cobro + conn.rs.getDouble(1);
-      }catch(SQLException ex) {
-                System.out.println("No existe ese huesped");
-            }
-       
-      String query3 = "UPDATE caja SET importe ="+ importe +"WHERE `id` = 1";
-      this.conn.Consult(query3);
-     
-      
+                JOptionPane.showMessageDialog(this, "La baja no se pudo realizar");                       
+      String query3 = "INSERT INTO caja VALUES("+id+",now(),"+String.valueOf(cobro)+")";
+      this.conn.Update(query3);
+      query3 = "UPDATE habitacion SET estatus=0 WHERE num="+Hab;
+      this.conn.Update(query3);
+      this.dispose();
     }//GEN-LAST:event_JButtonCobroMouseReleased
 
     private void jTextFieldNumHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumHabActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNumHabActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

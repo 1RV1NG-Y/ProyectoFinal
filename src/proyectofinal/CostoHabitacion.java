@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author W7
+ * 
  */
 public class CostoHabitacion extends javax.swing.JFrame {
     BD  conn;

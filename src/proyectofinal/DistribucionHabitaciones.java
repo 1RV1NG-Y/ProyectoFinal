@@ -222,7 +222,9 @@ public class DistribucionHabitaciones extends javax.swing.JFrame{
                         boton.addActionListener(new ActionListener(){
                             public void actionPerformed(ActionEvent e){
                                     String num = e.getActionCommand();
-                                    proyectofinal.Registro_Prueba.ventana.txtNum.setText(num);
+                                    System.out.println(num);
+                                    PantallasIniciales2.Principal.registro.jTextFieldElegHabitacion.setText(num);
+                                    //proyectofinal.RegistroHuespedes.ventana.jTextFieldElegHabitacion.setText(num);
                                    dispose();
                             }
                         });

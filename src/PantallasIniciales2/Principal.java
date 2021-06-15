@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import proyectofinal.BajasHuespedes;
 import proyectofinal.BuscarHuesped;
 import proyectofinal.CheckOut;
 import proyectofinal.ImporteActual;
@@ -26,16 +25,16 @@ import proyectofinal.RegistroHuespedes;
  */
 public class Principal extends javax.swing.JFrame {
    
+    public static RegistroHuespedes registro = new RegistroHuespedes();
     BD objconn = new BD();
     BD conn;
-   
+    
     
      public Principal(BD conexion,usuario usu) {
          this.conn = conexion;
         initComponents();
         this.setTitle("Hotel Buenavista - principal");
         this.nombreUsuario.setText(usu.getNomUsuario());     
-        
         
     }
     public Principal() {
@@ -267,13 +266,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuRegistroMouseReleased
 
     private void jMenuItemRegistrarHuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarHuespedMouseReleased
-        // TODO add your handling code here:
-         try {
-         new RegistroHuespedes(objconn).setVisible(true);
-     } catch (SQLException ex) {
-       
-     }
-        
+        // TODO add your handling code here:       
+  
+        registro.setVisible(true);
+           
     }//GEN-LAST:event_jMenuItemRegistrarHuespedMouseReleased
 
     private void jMenuItemBajahuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemBajahuespedMouseReleased
