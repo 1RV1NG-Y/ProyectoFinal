@@ -24,11 +24,22 @@ public class CheckOut extends javax.swing.JFrame {
      public int spa = 500;
      public int ServicioC = 450;
      public int cobro;
-        public int cobro_extra;
+     public int cobro_extra;
      public String nombre;
+     public String ciudad;
+     public String FechaEntd;
+     public String FechaSal;
+     public String CostoHab;
+     public String TipoHab;
+     public String TotalSinCargos;
+     public String TotalCargos;
+     public String CargosExtra;
+     boolean lav=false,paq=false,Cspa=false,serv=false;
+     
+     
      public int dias;
-      public int personas_extras;
-      public String id;
+     public int personas_extras;
+     public String id;
   
     public CheckOut(BD conexion) throws SQLException {
         this.conn = conexion;
@@ -256,7 +267,7 @@ public class CheckOut extends javax.swing.JFrame {
     private void jTextFieldNumHabKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNumHabKeyReleased
         // TODO add your handling code here:
         String NomHuesped, DiasEstancia, Ciudad , Habitacion;
-                
+                if(Cspa==true){System.out.println("esta en true");}
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) { //Enter was pressed
             System.out.println("Presionaste enter");
             String Hab = jTextFieldNumHab.getText().trim();
@@ -268,14 +279,17 @@ public class CheckOut extends javax.swing.JFrame {
            
             try{
                  id = this.conn.rs.getString(1);
-                nombre = this.conn.rs.getString(2);
+                nombre = this.conn.rs.getString(2);                
                 jTextAreaDatosHuesped.setText(  "Huesped: "+nombre+"\n"+
                                                 "Ciudad: "+conn.rs.getString(3)+"\n"+
                                                 "Habitacion usada: "+conn.rs.getString(7)+"\n"+
                                                 "Se quedo: "+conn.rs.getString(6)+" dias"+"\n"); 
                 dias = conn.rs.getInt(6);
                 personas_extras  = conn.rs.getInt(8);
-  
+                
+                FechaEntd = conn.rs.getString(4);
+                FechaSal = conn.rs.getString(5);
+                
             }catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Habitacion vacia",
                                                     "Error", JOptionPane.WARNING_MESSAGE);
@@ -292,26 +306,34 @@ public class CheckOut extends javax.swing.JFrame {
                 String query2 = "SELECT * FROM habitacion WHERE num="+Hab;
                 this.conn.Consult(query2);
                 try{
-                    cobro = conn.rs.getInt(4)*dias;   //costo habitacion + costo extra
+                    cobro = conn.rs.getInt(4)*dias;   //
+                    TotalSinCargos = String.valueOf(cobro);
                     cobro_extra = conn.rs.getInt(5)*personas_extras;
+                    CostoHab = conn.rs.getString(4);
+                    TipoHab = conn.rs.getString(3);
                     
                 System.out.println("Calculando");
             }catch (SQLException ex) {
                 System.out.println("No existe ese huesped");
             }
         
-        if(jCheckBoxLav.isSelected()){
+                CargosExtra = "Servicio  /  $costo\n";
+        if(jCheckBoxLav.isSelected()){  
                     System.out.println("lavanderia");
                     cobro_extra +=lavanderia;
+                    CargosExtra=CargosExtra+"lavanderia $200\n";
                 }
                 if(jCheckBoxSC.isSelected()){
                     cobro_extra += ServicioC;
+                    CargosExtra=CargosExtra+"Servicio Habitacion $450\n";
                 }
                 if(jCheckBoxSpa.isSelected()){
                     cobro_extra +=spa;
+                    CargosExtra=CargosExtra+"Spa $500\n";
                 }
                 if(jCheckBoxPaq.isSelected()){
                     cobro_extra+=paqueteria;
+                    CargosExtra=CargosExtra+"Paqueteria $100\n";
                 }
         
                 cobro += cobro_extra;
@@ -330,9 +352,27 @@ public class CheckOut extends javax.swing.JFrame {
             else
                 JOptionPane.showMessageDialog(this, "La baja no se pudo realizar");                       
       String query3 = "INSERT INTO caja VALUES("+id+",now(),"+String.valueOf(cobro)+")";
+      TotalCargos = String.valueOf(cobro);
       this.conn.Update(query3);
       query3 = "UPDATE habitacion SET estatus=0 WHERE num="+Hab;
       this.conn.Update(query3);
+      
+        System.out.println("Imprimiendo Ticket");
+        
+        PlantillaPdfCobro miPlantilla = new PlantillaPdfCobro(
+                "Java Inn",//Nombre hotel
+                "Programa tus estancia , compila tus vacaciones ",//Lema
+                "Aguascalientes",//ubicacion
+                "src/jlogo.png",//imagen1
+                "src/Firma.png",//imagen2
+                nombre,ciudad,FechaEntd,FechaSal,TipoHab
+                ,CostoHab,String.valueOf(dias),TotalSinCargos,TotalCargos,CargosExtra
+                ,String.valueOf(lavanderia),String.valueOf(paqueteria),String.valueOf(spa),String.valueOf(ServicioC)
+                );
+        
+        miPlantilla.crearPlantilla();
+                   
+      
       this.dispose();
     }//GEN-LAST:event_JButtonCobroMouseReleased
 
