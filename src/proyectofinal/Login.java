@@ -25,6 +25,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.applet.AudioClip;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,7 +37,7 @@ public class Login extends javax.swing.JFrame {
       AudioClip Sound;
 
     // Import ImageIcon     
-ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
+ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
 
 // In init() method write this code
 
@@ -227,6 +228,13 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo.png").getImage().ge
             }
         });
     }
+    public  void paint(Graphics g){
+    super.paint(g);
+    Toolkit t = Toolkit.getDefaultToolkit();
+    Image imagen = t.getImage("src/jlogo1.png");
+    g.drawImage(imagen, 480, 0, this.jDesktopPane1);
+
+}
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
