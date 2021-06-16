@@ -35,6 +35,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     BD conn;
       AudioClip Sound;
+      Clip clip;
 
     // Import ImageIcon     
 ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
@@ -50,6 +51,18 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().g
        
         this.conn=conexion;
         initComponents();
+         try {
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File("src/musica.wav")));
+            clip.start();
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
          Sound= java.applet.Applet.newAudioClip(getClass().getResource("/musica.wav"));
         Sound.play();
         
@@ -180,7 +193,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().g
         usuario usu = null;
         try{
             usu = new usuario(this.conn.rs.getString(3));
-            Sound.stop();
+            clip.stop();
+            clip.close();
              this.setVisible(false);
         new Principal(this.conn,usu).setVisible(true);
 
