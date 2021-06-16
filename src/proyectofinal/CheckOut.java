@@ -284,6 +284,7 @@ public class CheckOut extends javax.swing.JFrame {
                                                 "Ciudad: "+conn.rs.getString(3)+"\n"+
                                                 "Habitacion usada: "+conn.rs.getString(7)+"\n"+
                                                 "Se quedo: "+conn.rs.getString(6)+" dias"+"\n"); 
+                ciudad = conn.rs.getString(3);
                 dias = conn.rs.getInt(6);
                 personas_extras  = conn.rs.getInt(8);
                 
@@ -362,7 +363,7 @@ public class CheckOut extends javax.swing.JFrame {
         PlantillaPdfCobro miPlantilla = new PlantillaPdfCobro(
                 "Java Inn",//Nombre hotel
                 "Programa tus estancia , compila tus vacaciones ",//Lema
-                "Aguascalientes",//ubicacion
+                "Antiguo Camino a Calvillo km4 ejido San Ignacio, 20313 Aguascalientes",//ubicacion
                 "src/jlogo.png",//imagen1
                 "src/Firma.png",//imagen2
                 nombre,ciudad,FechaEntd,FechaSal,TipoHab

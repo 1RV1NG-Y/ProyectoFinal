@@ -79,7 +79,7 @@ public class PlantillaPdfCobro {
         
         try {
        
-            archivo = new FileOutputStream(NombreHuesped + ".pdf"); //nombra el archivo
+            archivo = new FileOutputStream("Recibo "+NombreHuesped + ".pdf"); //nombra el archivo
           
             PdfWriter.getInstance(documento, archivo);
             documento.open();
@@ -91,7 +91,7 @@ public class PlantillaPdfCobro {
             try {
                 image =  Image.getInstance(rutaImagen2);//carga imagen
                 image.scaleAbsolute(150, 100);//cambia tamaño
-                image.setAbsolutePosition(205, 540);//coloca imagen en la posicion
+                image.setAbsolutePosition(205, 340);//coloca imagen en la posicion
                 image2 = Image.getInstance(rutaImagen);
                 image2.scaleAbsolute(150,100);
                 image2.setAbsolutePosition(425,730);
@@ -99,30 +99,28 @@ public class PlantillaPdfCobro {
             } catch (Exception e) {
             }
             
-            System.out.println("preimagenes");
             documento.add(image);//agrega la imagen al documento
-            System.out.println("Archivo ");
             documento.add(image2);
-            System.out.println("imagen2");
-            System.out.println("titulo");
             documento.add(titulo);
-            System.out.println("Archivo creado correctamente!");
-            documento.add(new Paragraph("Nombre hotel: " + nombreHotel));
-            documento.add(new Paragraph("Lema: " + lema));
-            documento.add(new Paragraph("Ubicacion: " + ubicacion));
-            System.out.println("vars1");
+            
+            documento.add(new Paragraph("\n"));
+            documento.add(new Paragraph("\n"));
+            documento.add(new Paragraph("\n"));
+            
+            documento.add(new Paragraph("Ubicacion: " + ubicacion+"\n"));
+           
             documento.add(new Paragraph("Nombre Huesped: " + NombreHuesped));
             documento.add(new Paragraph("Ciudad: " + CiudadH));
             documento.add(new Paragraph("Fecha de ingreso: " + FechaEntd));
-            System.out.println("vars2");
+            
             documento.add(new Paragraph("Fecha de salida: " + FechaSal));
             documento.add(new Paragraph("Tipo de habitacion: " + TipoHab));
             documento.add(new Paragraph("Costo de habitacion: " + CostoHab));
-            System.out.println("vars3!");
+            
             documento.add(new Paragraph("Dias de estancia: " + Dias));
-            documento.add(new Paragraph("Total pago sin cargos extra: " + TotalSinCargos));
-            documento.add(new Paragraph("Total pago con cargos extra: " + TotalCargos));
-            System.out.println("variables");
+            documento.add(new Paragraph("Total pago sin cargos extra: $" + TotalSinCargos));
+            documento.add(new Paragraph("Total pago con cargos extra: $" + TotalCargos));
+            
             
             documento.add(Chunk.NEWLINE);
             //Parrafo

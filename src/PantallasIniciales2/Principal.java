@@ -14,10 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import proyectofinal.BuscarHuesped;
-import proyectofinal.CheckOut;
-import proyectofinal.ImporteActual;
-import proyectofinal.RegistroHuespedes;
+import proyectofinal.*;
 
 /**
  *
@@ -167,6 +164,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemOcupHabitaciones);
 
         jMenuItemNumHabitaciones.setText("Num Habitaciones");
+        jMenuItemNumHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNumHabitacionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemNumHabitaciones);
 
         jMenuItemOcupHotel.setText("Ocupacion hotel %");
@@ -178,6 +180,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.add(jMenuItemOcupHotel);
 
         jMenuItemCostosHabitaciones.setText("Costos habitacion");
+        jMenuItemCostosHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCostosHabitacionesActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemCostosHabitaciones);
 
         jMenuItemBuscarHuesped.setText("Buscar Huesped");
@@ -188,13 +195,28 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemBuscarHuesped);
 
-        jMenuItemRevisarHabitacion.setText("Revisas Habitacion");
+        jMenuItemRevisarHabitacion.setText("Buscar x habitacion");
+        jMenuItemRevisarHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRevisarHabitacionActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemRevisarHabitacion);
 
         jMenuItem9.setText("Habitaciones x piso");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem1.setText("Lista Huespedes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
@@ -236,10 +258,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemOcupHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcupHabitacionesActionPerformed
         // TODO add your handling code here:
+        try {
+         new OcupacionHab(objconn).setVisible(true);
+     } catch (SQLException ex) {
+       
+     }
     }//GEN-LAST:event_jMenuItemOcupHabitacionesActionPerformed
 
     private void jMenuItemOcupHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOcupHotelActionPerformed
         // TODO add your handling code here:
+        
+        try {
+         new OcupacionHotel(objconn).setVisible(true);
+        }catch (SQLException ex) {
+       
+     }
+        
     }//GEN-LAST:event_jMenuItemOcupHotelActionPerformed
 
     private void jMenuItemGaleriaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemGaleriaMouseReleased
@@ -273,12 +307,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRegistrarHuespedMouseReleased
 
     private void jMenuItemBajahuespedMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemBajahuespedMouseReleased
-        // TODO add your handling code here:
-         /*try {
-         new BajasHuespedes(objconn).setVisible(true);
-        }catch (SQLException ex) {
-       
-     }*/
+        
          try {
          new CheckOut(objconn).setVisible(true);
         }catch (SQLException ex) {
@@ -286,6 +315,47 @@ public class Principal extends javax.swing.JFrame {
      }
         
     }//GEN-LAST:event_jMenuItemBajahuespedMouseReleased
+
+    private void jMenuItemNumHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumHabitacionesActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+         new NumHabitaciones(objconn).setVisible(true);
+        }catch (SQLException ex) {
+       
+     }      
+    }//GEN-LAST:event_jMenuItemNumHabitacionesActionPerformed
+
+    private void jMenuItemCostosHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCostosHabitacionesActionPerformed
+        // TODO add your handling code here:
+        try {
+         new CostoHabitacion().setVisible(true);
+        }catch (SQLException ex) {
+       
+     }
+    }//GEN-LAST:event_jMenuItemCostosHabitacionesActionPerformed
+
+    private void jMenuItemRevisarHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRevisarHabitacionActionPerformed
+        // TODO add your handling code here:
+        new BuscarHabitacion().setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemRevisarHabitacionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        try {
+         new ListaHuespedes().setVisible(true);
+        }catch (SQLException ex) {
+       
+     }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        try {
+                new DistribucionHabitaciones().setVisible(true);
+            } catch (SQLException ex) { }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
