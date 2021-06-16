@@ -367,6 +367,9 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         String query2 = "UPDATE habitacion SET estatus = 1 WHERE `num` ="+Habitacion;        
         this.conn.Update(query2);    
         
+        
+        
+        
         jTextFieldNombreHuesped.setText("");
         jSpinnerDiasEstancia.setValue(0);
         jSpinnerNumHospedados.setValue(0);//pasa el valor del spinner a string para pasarlo a la bd
@@ -375,6 +378,7 @@ public class RegistroHuespedes extends javax.swing.JFrame {
         jTextFieldElegHabitacion.setText("");
                
         this.dispose();
+        new Recibo(NomHuesped,Ciudad,FEntd,FSal,PersonasExtra,Habitacion).setVisible(true);
         }
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 

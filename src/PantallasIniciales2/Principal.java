@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import proyectofinal.*;
 
 /**
@@ -30,6 +31,16 @@ public class Principal extends javax.swing.JFrame {
      public Principal(BD conexion,usuario usu) {
          this.conn = conexion;
         initComponents();
+        try{
+        String query1 = "SELECT estatus,count(*) FROM `habitacion` WHERE estatus = 1 GROUP BY 1";
+        this.conn.Consult(query1);
+        if(conn.rs.getInt(2)==30){
+            this.Lleno.setText("HOTEL LLENO");
+        }}catch(SQLException ex)
+       {
+           JOptionPane.showMessageDialog(this,"Error");
+       }
+        
         this.setTitle("Hotel Buenavista - principal");
         this.nombreUsuario.setText(usu.getNomUsuario());     
         
@@ -57,7 +68,7 @@ public class Principal extends javax.swing.JFrame {
             }
         };
         nombreUsuario = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Lleno = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuRegistro = new javax.swing.JMenu();
         jMenuItemRegistrarHuesped = new javax.swing.JMenuItem();
@@ -82,30 +93,33 @@ public class Principal extends javax.swing.JFrame {
         nombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         nombreUsuario.setText("jLabel1");
 
+        Lleno.setOpaque(true);
+
         jDesktopPane1.setLayer(nombreUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(Lleno, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(1265, Short.MAX_VALUE)
-                .addComponent(nombreUsuario)
-                .addGap(279, 279, 279))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(733, 733, 733)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1229, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(nombreUsuario)
+                        .addGap(279, 279, 279))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(Lleno, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(244, 244, 244))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombreUsuario)
-                .addGap(417, 417, 417)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lleno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(884, Short.MAX_VALUE))
         );
 
         jMenuBar1.setAlignmentX(1.0F);
@@ -420,8 +434,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Lleno;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
