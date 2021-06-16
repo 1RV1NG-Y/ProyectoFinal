@@ -114,7 +114,7 @@ public class Galeria extends JFrame implements ActionListener{
            
         }
         
-        icono = new ImageIcon("src/"+contador+".jpg");
+        icono = new ImageIcon("src/"+contador+".jpg"); //ruta imagenes
         imagen.setIcon(icono);
         
         

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class CheckOut extends javax.swing.JFrame {
 
      BD  conn;
-     public int lavanderia = 200;
+     public int lavanderia = 200;   //pago unico
      public int paqueteria = 100;
      public int spa = 500;
      public int ServicioC = 450;
@@ -309,7 +309,7 @@ public class CheckOut extends javax.swing.JFrame {
                 try{
                     cobro = conn.rs.getInt(4)*dias;   //
                     TotalSinCargos = String.valueOf(cobro);
-                    cobro_extra = conn.rs.getInt(5)*personas_extras;
+                    cobro_extra = conn.rs.getInt(5)*(personas_extras-conn.rs.getInt(3)+1);            //Cobro por personas extra 
                     CostoHab = conn.rs.getString(4);
                     TipoHab = conn.rs.getString(3);
                     
