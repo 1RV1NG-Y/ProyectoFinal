@@ -38,7 +38,7 @@ public class Login extends javax.swing.JFrame {
       Clip clip;
 
     // Import ImageIcon     
-ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
+ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/stars.png").getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH));
 
 // In init() method write this code
 
@@ -245,8 +245,8 @@ ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/jlogo1.png").getImage().g
     public  void paint(Graphics g){
     super.paint(g);
     Toolkit t = Toolkit.getDefaultToolkit();
-    Image imagen = t.getImage("src/jlogo1.png");
-    g.drawImage(imagen, 480, 0, this.jDesktopPane1);
+    Image imagen = t.getImage("src/stars.png");
+    g.drawImage(imagen, 560, 260, this.jDesktopPane1);
 
 }
     
